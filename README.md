@@ -24,12 +24,22 @@ remains available. No database or extra dependencies are used.
   addition, subtraction, multiplication, division, input validation, and Clear.
 - **Profile:** Carl John Paul Masayon, student ID 554004, CCE106L - 3450,
   c.masayon.554004@umindanao.edu.ph.
-- **Social Media:** sample Facebook, Instagram, and YouTube accounts. Tapping an
-  account displays its username in a SnackBar.
+- **Social Media:** two sample posts and a Create Post button. Enter a caption
+  and an HTTP or HTTPS image URL to add a post under the logged-in username.
+  Like or unlike posts and add comments using the Send button. Failed images
+  display a broken-image placeholder.
+
+Use **Logout** in the Profile page's top bar to return to Login and clear the
+session. Back cannot reopen the previous session. Accounts, posts, likes, and
+comments are held in memory and are not saved after an application restart.
+Logging out also discards the current feed.
 
 Each screen lives in its own Dart file under `lib/`. `main_screen.dart` switches
 tabs using `setState()` and an `IndexedStack`, keeping the calculator's inputs
-and result when another tab is selected. The calculator was copied from the
+and result when another tab is selected. Feed cards retain likes and comments
+across tab switches, scrolling, and insertion of new posts. The four feed files
+are in `lib/social_media/`. Network images require an internet connection.
+The calculator was copied from the
 adjacent `masayon_calculator` project, with its override annotations corrected.
 
 ## Verify

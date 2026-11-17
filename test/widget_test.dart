@@ -26,17 +26,24 @@ void main() {
   setUp(() {
     DemoAuth.registeredUsername = null;
     DemoAuth.registeredPassword = null;
+    DemoAuth.logout();
   });
 
   test('Registration replaces the demo account and preserves admin login', () {
     expect(DemoAuth.login('admin', 'admin123'), isTrue);
+    expect(DemoAuth.currentUsername, 'admin');
     expect(DemoAuth.login('admin', 'wrong'), isFalse);
     DemoAuth.register('first', 'password1');
     expect(DemoAuth.login('first', 'password1'), isTrue);
     DemoAuth.register('second', 'password2');
     expect(DemoAuth.login('first', 'password1'), isFalse);
     expect(DemoAuth.login('second', 'password2'), isTrue);
+    expect(DemoAuth.currentUsername, 'second');
     expect(DemoAuth.login('admin', 'admin123'), isTrue);
+    DemoAuth.logout();
+    expect(DemoAuth.currentUsername, isNull);
+    expect(DemoAuth.login('invalid', 'invalid'), isFalse);
+    expect(DemoAuth.currentUsername, isNull);
   });
 
   testWidgets(
@@ -104,7 +111,7 @@ void main() {
   });
 
   testWidgets(
-    'Four tabs preserve calculator state and show profile and social accounts',
+    'Four tabs preserve calculator state and show profile and social feed',
     (tester) async {
       await tester.pumpWidget(const StudentApp());
       await login(tester, 'admin', 'admin123');
@@ -127,19 +134,9 @@ void main() {
 
       await tester.tap(find.byIcon(Icons.share_outlined));
       await tester.pumpAndSettle();
-      for (final account in {
-        'Facebook': 'student.sample',
-        'Instagram': '@student.sample',
-        'YouTube': '@StudentChannel',
-      }.entries) {
-        await tapText(tester, account.key);
-        expect(
-          find.text('Selected account: ${account.key}: ${account.value}'),
-          findsOneWidget,
-        );
-        await tester.pump(const Duration(seconds: 4));
-        await tester.pumpAndSettle();
-      }
+      expect(find.text('JohnDoe'), findsOneWidget);
+      expect(find.text('Enjoying the sunny weather!'), findsOneWidget);
+      expect(find.byTooltip('Create Post'), findsOneWidget);
 
       await tester.tap(find.byIcon(Icons.home_outlined));
       await tester.pumpAndSettle();

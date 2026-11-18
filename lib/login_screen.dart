@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (valid) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       Navigator.of(
         context,
       ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));

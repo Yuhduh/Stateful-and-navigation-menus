@@ -58,7 +58,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
 
     setState(() {
-      result = answer.toString();
+      // Keep whole-number results consistent on Dart VM and Flutter Web.
+      result = answer == answer.truncateToDouble()
+          ? answer.toStringAsFixed(1)
+          : answer.toString();
       operationLabel = '$first $operation $second';
     });
   }

@@ -1,6 +1,7 @@
 # Masayon Navigation App
 
-Flutter classroom activity on `StatefulWidget`, `setState()`, and bottom navigation.
+Flutter classroom activity integrating demo authentication, `StatefulWidget`,
+`setState()`, and bottom navigation.
 
 ## Run
 
@@ -19,17 +20,19 @@ remains available. No database or extra dependencies are used.
 
 ## Pages
 
-- **Home:** welcome message and application overview.
+- **Dashboard:** welcomes the logged-in username and introduces the application.
 - **Calculator:** Laboratory Activity 4 calculator with two number inputs,
   addition, subtraction, multiplication, division, input validation, and Clear.
-- **Profile:** Carl John Paul Masayon, student ID 554004, CCE106L - 3450,
-  c.masayon.554004@umindanao.edu.ph.
-- **Social Media:** two sample posts and a Create Post button. Enter a caption
+- **Social:** two sample posts and a Create Post button. Enter a caption
   and an HTTP or HTTPS image URL to add a post under the logged-in username.
   Like or unlike posts and add comments using the Send button. Failed images
   display a broken-image placeholder.
+- **Profile:** Carl John Paul Masayon, student ID 554004, CCE106L - 3450,
+  c.masayon.554004@umindanao.edu.ph, the logged-in username, and Logout.
 
-Use **Logout** in the Profile page's top bar to return to Login and clear the
+The tab order is **Dashboard → Calculator → Social → Profile**.
+
+Use **Logout** on the Profile page to return to Login and clear the
 session. Back cannot reopen the previous session. Accounts, posts, likes, and
 comments are held in memory and are not saved after an application restart.
 Logging out also discards the current feed.
@@ -48,3 +51,6 @@ adjacent `masayon_calculator` project, with its override annotations corrected.
 flutter analyze
 flutter test
 ```
+
+See `activity_report.md` for the activity's test-results table and answers to
+the five guide questions. The results identify the automated checks used.

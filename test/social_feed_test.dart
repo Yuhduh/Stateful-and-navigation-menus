@@ -4,6 +4,7 @@ import 'package:lastname_navigation_app/demo_auth.dart';
 import 'package:lastname_navigation_app/login_screen.dart';
 import 'package:lastname_navigation_app/main.dart';
 import 'package:lastname_navigation_app/main_screen.dart';
+import 'package:lastname_navigation_app/profile_page.dart';
 import 'package:lastname_navigation_app/social_media/create_post_sheet.dart';
 import 'package:lastname_navigation_app/social_media/post_card.dart';
 import 'package:lastname_navigation_app/social_media/social_media.dart';
@@ -22,7 +23,8 @@ Future<void> signIn(
   await tester.enterText(find.byType(TextFormField).at(0), username);
   await tester.enterText(find.byType(TextFormField).at(1), password);
   await tap(tester, find.widgetWithText(ElevatedButton, 'Login'));
-  await tap(tester, find.byIcon(Icons.share_outlined));
+  expect(find.text('Welcome, $username!'), findsOneWidget);
+  await tap(tester, find.byIcon(Icons.people_outline));
 }
 
 Finder card(String caption) =>
@@ -102,13 +104,13 @@ void main() {
       await tap(tester, inside(newCard, find.byTooltip('Send comment')));
 
       for (final icon in [
-        Icons.home_outlined,
+        Icons.dashboard_outlined,
         Icons.calculate_outlined,
         Icons.person_outline,
       ]) {
         await tap(tester, find.byIcon(icon));
       }
-      await tap(tester, find.byIcon(Icons.share_outlined));
+      await tap(tester, find.byIcon(Icons.people_outline));
       expect(inside(newCard, find.text('Liked')), findsOneWidget);
       expect(inside(newCard, find.text('My comment')), findsOneWidget);
 
@@ -201,7 +203,15 @@ void main() {
       await signIn(tester, 'admin', 'admin123');
       await createPost(tester, 'Admin session post');
       await tap(tester, find.byIcon(Icons.person_outline));
-      await tap(tester, find.byTooltip('Logout'));
+      await tester.scrollUntilVisible(
+        find.text('Logout'),
+        200,
+        scrollable: inside(
+          find.byType(ProfilePage),
+          find.byType(Scrollable),
+        ).first,
+      );
+      await tap(tester, find.text('Logout'));
       expect(DemoAuth.currentUsername, isNull);
       expect(find.byType(LoginScreen), findsOneWidget);
       expect(find.byType(MainScreen), findsNothing);

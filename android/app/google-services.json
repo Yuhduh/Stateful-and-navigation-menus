@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117851055554",
+    "project_id": "masayon-student-app-ddd48",
+    "storage_bucket": "masayon-student-app-ddd48.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117851055554:android:d81d308ea8501f7c6fa25b",
+        "android_client_info": {
+          "package_name": "com.example.lastname_navigation_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFZUWH9D3lErzf20y5NOfpItOnkcxpv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
